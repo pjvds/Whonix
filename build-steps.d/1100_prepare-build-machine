@@ -183,8 +183,13 @@ prepare-build-machine() {
       #######################################################################
       ## Build Dependencies for creating VirtualBox Images (.vdi and .ova) #
       #######################################################################
+      ## Quick fix to install virtualbox on wercker labs environment
+      apt-get install dkms
+      wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
+      sh -c 'echo "deb http://download.virtualbox.org/virtualbox/debian raring contrib" >> /etc/apt/sources.list.d/virtualbox.list'
+      apt-get update
       apt-get install $extra_apt_timeout $extra_apt_opt --yes \
-         virtualbox
+         virtualbox-4.2
    fi
 
    ## Hack for Ubuntu 12.04 Precise Pangolin / Travis CI.
