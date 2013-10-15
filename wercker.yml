@@ -2,6 +2,8 @@ box: wercker-labs/docker
 
 build:
     steps:
+        - install-packages:
+            packages: git
         - script:
             name: whonix_build_both
             code: |
